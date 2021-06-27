@@ -180,7 +180,7 @@ zaki.on('message-new', async (mek) => {
 	try {
 		if (!mek.message) return
 		if (mek.key && mek.key.remoteJid == 'status@broadcast') return
-		let infoMSG = JSON.parse(fs.readFileSync('./src/msg.data.json'))
+	 	let infoMSG = JSON.parse(fs.readFileSync('./src/msg.data.json'))
 		infoMSG.push(JSON.parse(JSON.stringify(mek)))
 		fs.writeFileSync('./src/.dat/msg.data.json', JSON.stringify(infoMSG, null, 2))
 		const urutan_pesan = infoMSG.length
@@ -188,8 +188,6 @@ zaki.on('message-new', async (mek) => {
 			infoMSG.splice(0, 4300)
 			fs.writeFileSync('./src/msg.data.json', JSON.stringify(infoMSG, null, 2))
 		}
-	 if (!mek.message) return
-	 if (mek.key && mek.key.remoteJid == 'status@broadcast') return
 		const typei = Object.keys(mek.message)[0]
 		budo = (typei === 'conversation') ? mek.message.conversation : (typei === 'extendedTextMessage') ? mek.message.extendedTextMessage.text : ''
 		if(mek.key.fromMe){
